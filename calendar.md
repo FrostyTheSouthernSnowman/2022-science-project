@@ -1,6 +1,6 @@
 # Science Fair Project Due Dates 2022
 ---------
-## Full Project Deadline - full project due 11/7/2022 BEFORE assembly (saying the pledge)
+## Full Project Deadline - full project due 11/7/2022 BEFORE assembly
 
 purpose/question - must be a testable question
 - 8/26
