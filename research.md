@@ -4,6 +4,8 @@
 
 "It is important, therefore, that the function faithfully represent our design goals. If we choose a poor error function and obtain unsatisfactory results, the fault is ours for badly specifying the goal of the search." — Page 155, Neural Smithing: Supervised Learning in Feedforward Artificial Neural Networks, 1999
 
+"The gradient points in the direction in which a function increases most rapidly." - Page 983, Calculus: Early Transcendentals by Howard Anton, Irl Bivens, Stephen Davis, 2005
+
 # Resources
     - https://towardsdatascience.com/linear-regression-with-python-and-numpy-25d0e1dd220d
     - https://scikit-learn.org/stable/modules/linear_model.html
