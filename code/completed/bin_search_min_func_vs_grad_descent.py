@@ -7,11 +7,11 @@ number = np.random.randint(10, 100) * np.random.random()
 
 
 def func(n):
-    return n**2
+    return 2.5*(n**2) + 6.3*n + 32.54
 
 
 def d_func(n):
-    return 2*n
+    return 5*n + 6.3
 
 
 def min_grad_descent(lr, n_epochs):

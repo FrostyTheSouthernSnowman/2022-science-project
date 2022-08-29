@@ -7,11 +7,11 @@ from enum import Enum
 
 class Algorithms(Enum):
     GRADIENT_DESCENT = 1
-    GRADIENT_APPROXAMATOR = 2
+    BINARY_SEARCH = 2
 
 
 x = np.array([0, 1, 2]).reshape(-1, 1)
-y = np.array([1, 3, 5]).reshape(-1, 1)
+y = np.array([0, 2, 4]).reshape(-1, 1)
 
 
 class Linear():
@@ -51,34 +51,57 @@ class Linear():
                 if include_stats:
                     self.loss_hist.append(loss)
 
-        if algo is Algorithms.GRADIENT_APPROXAMATOR:
-            if self.lr == 1:
-                self.lr = 0.9999999999
-
-            prev_loss = self.get_loss(X, Y)
+        if algo is Algorithms.BINARY_SEARCH:
+            prev_loss = None
             loss, w_grad_approx, b_grad_approx = self.fit_gradient_descent_epoch(
                 X, Y)
-            print(w_grad_approx)
+
+            w_prev = self.w
+            #!b_prev = self.b
+
             if include_stats:
                 self.loss_hist.append(loss)
-                self.loss_hist.append(prev_loss)
 
-            for i in range(n_epochs - 1):
+            i_elapsed = 1
+            for _ in range(n_epochs - 1):
                 prev_loss = loss
-                loss = self.get_loss(X, Y)
-                w_grad_approx = w_grad_approx * self.lr * \
-                    (prev_loss-loss)
-                b_grad_approx = b_grad_approx * self.lr * \
-                    (prev_loss-loss)
 
-                self.w_grad_hist.append(w_grad_approx)
-                self.b_grad_hist.append(b_grad_approx)
+                w_prev = self.w
+                #!b_prev = self.b
 
                 self.w -= w_grad_approx
-                self.b -= b_grad_approx
-                print(loss-prev_loss)
+                #!self.b -= b_grad_approx
+
+                loss = self.get_loss(X, Y)
+
+                if loss > prev_loss:
+                    self.w += w_grad_approx
+                    #!self.b += b_grad_approx
+                    break
+
                 if include_stats:
-                    self.loss_hist.append(prev_loss)
+                    self.loss_hist.append(loss)
+
+                i_elapsed += 1
+
+            for _ in range(n_epochs - i_elapsed):
+                # w optimizer iteration
+                w_half_point = w_prev + ((self.w - w_prev) / 2)
+                w_first_quartile = w_prev + ((w_half_point - w_prev) / 2)
+                if self.get_loss(X, Y, w=w_first_quartile, b=self.b) < self.get_loss(X, Y, w=w_half_point):
+                    self.w = w_half_point
+
+                else:
+                    w_prev = w_half_point
+
+                #! b optimizer iteration
+                """b_half_point = b_prev + ((self.b - b_prev) / 2)
+                b_first_quartile = w_prev + ((b_half_point - w_prev) / 2)
+                if self.get_loss(X, Y, w=b_first_quartile, b=self.b) < self.get_loss(X, Y, b=b_half_point):
+                    self.b = b_half_point
+
+                else:
+                    b_prev = b_half_point"""
 
         return self.w, self.b
 
@@ -98,12 +121,12 @@ class Linear():
 
         d_cost_over_d_w, d_cost_over_d_b = self.gradient(X, Y, self.x_shape)
 
-        error = self.get_loss(X, Y)
-
         # updating the weights with the calculated gradients
         self.w -= self.lr*d_cost_over_d_w
         # updating the weights with the calculated gradients
         self.b -= self.lr*d_cost_over_d_b
+
+        error = self.get_loss(X, Y)
 
         return error, d_cost_over_d_w, d_cost_over_d_b
 
@@ -130,26 +153,42 @@ class Linear():
 
         return d_cost_over_d_w, d_cost_over_d_b
 
-    def get_loss(self, X: np.array, Y: np.array) -> float:
+    def get_loss(self, X: np.array, Y: np.array, w=None, b=None) -> float:
         """
         gets the current loss
 
         params:
             x: np.array containing the x values
             y: np.array containing the y values
+            w: float of w value
+            b: float of b value
 
         returns:
             float: the loss
         """
 
-        return np.square(np.subtract(self.predict(X), Y)).mean()
+        if w == None:
+            w = self.w
 
-    def predict(self, X) -> float:
-        return self.w * X + self.b
+        if b == None:
+            b = self.b
+
+        return np.square(np.subtract(self.predict(X, w=w, b=b), Y)).mean()
+
+    def predict(self, X, w=None, b=None) -> float:
+
+        if w == None:
+            w = self.w
+
+        if b == None:
+            b = self.b
+
+        return w * X  # + b
 
 
 model = Linear(0.1)
 
-print(model.fit(x, y, 20, Algorithms.GRADIENT_APPROXAMATOR, include_stats=True))
+print(model.fit(x, y, 50, Algorithms.BINARY_SEARCH, include_stats=True))
+print(model.loss_hist)
 fig = px.line(y=model.loss_hist)
 fig.show()

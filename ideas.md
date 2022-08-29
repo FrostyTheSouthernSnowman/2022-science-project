@@ -26,3 +26,6 @@ m1 -> m2 -> m3, m3 is worse, mid(m1, m2) = m4, mid(m2, m3) = m5, if m4 > m5, rep
 
 ## V3: A Slightly Different Idea Rooted in the Same Algorithm
 Use the old protocol as a way of approximating gradients.
+
+## V4: Binary Search to Find Local Minima of Functions 
+Just use binary search to find minimum of a 1d function.
