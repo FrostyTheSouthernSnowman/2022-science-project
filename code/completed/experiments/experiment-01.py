@@ -1,5 +1,6 @@
-from glob import glob
 import numpy as np
+
+np.random.seed(77)
 
 lr = 0.1
 n_epochs = 100
@@ -7,11 +8,11 @@ number = np.random.randint(10, 100) * np.random.random()
 
 
 def func(n):
-    return 2.5*(n**2) + 6.3*n + 32.54
+    return n**2
 
 
 def d_func(n):
-    return 5*n + 6.3
+    return 2*n
 
 
 def min_grad_descent(lr, n_epochs):
@@ -56,6 +57,20 @@ def min_bin_search(lr, n_epochs):
 if __name__ == "__main__":
     grad_descent_min = min_grad_descent(lr, n_epochs)
     bin_search_min = min_bin_search(lr, n_epochs)
+
+    x_vals = [bin_search_min - 10, bin_search_min - 9, bin_search_min - 8, bin_search_min - 7, bin_search_min - 6, bin_search_min - 5, bin_search_min - 4, bin_search_min - 3, bin_search_min - 2, bin_search_min - 1, bin_search_min, bin_search_min + 1, bin_search_min + 2,
+              bin_search_min + 3, bin_search_min + 4, bin_search_min + 5, bin_search_min + 6, bin_search_min + 7, bin_search_min + 8, bin_search_min + 9, bin_search_min + 10]
+    y_vals = [func(x) for x in x_vals]
+
+    from plotly import graph_objects as go
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode="lines", name="func"))
+    fig.add_trace(go.Scatter(x=[grad_descent_min], y=[
+                  func(grad_descent_min)], mode="markers", name=f"gradient descent minimum: {grad_descent_min}"))
+    fig.add_trace(go.Scatter(x=[bin_search_min], y=[
+                  func(bin_search_min)], mode="markers", name=f"binary search minimum: {bin_search_min}"))
+    fig.show()
 
     if abs(func(grad_descent_min)) < abs(func(bin_search_min)):
         print("gradient descent is better")
