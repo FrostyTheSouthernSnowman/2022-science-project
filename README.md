@@ -14,4 +14,7 @@ Since this is a school project, I cannot accept any contributions until I have f
 contributions. 
 
 ## Contact
-You can contact me via email (yosi_frost@icloud.com) if nescessary.
+You can contact me via email (yosi_frost@icloud.com) if necessary.
+
+## Experiments
+experiment-01: [/code/completed/experiments/experiment-01.py](/code/completed/experiments/experiment-01.py)
