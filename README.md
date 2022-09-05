@@ -22,5 +22,5 @@ You can contact me via email (yosi_frost@icloud.com) if necessary.
 
 ## Experiments
 
-experiment-01: [/code/completed/experiments/experiment-01.py](/code/completed/experiments/experiment-01.py)
-experiment-02: [/code/completed/experiments/experiment-02.py](/code/completed/experiments/experiment-02.py)
+- experiment-01: [/code/completed/experiments/experiment-01.py](/code/completed/experiments/experiment-01.py)
+- experiment-02: [/code/completed/experiments/experiment-02.py](/code/completed/experiments/experiment-02.py)
