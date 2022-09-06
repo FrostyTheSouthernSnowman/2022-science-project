@@ -5,7 +5,7 @@ import numpy as np
 np.random.seed(21)
 
 lr = 0.1
-n_epochs = 200
+n_epochs = 100
 number = np.random.randint(-50, 50) * np.random.random()
 
 number = -20
