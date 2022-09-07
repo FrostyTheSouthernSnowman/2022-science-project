@@ -20,6 +20,13 @@ contributions.
 
 You can contact me via email (yosi_frost@icloud.com) if necessary.
 
+# Graphs
+
+The html for the graphs can be found on the pages.
+
+- quadratic equation: [/code/completed/experiments/quadratic.html](https://frostythesouthernsnowman.github.io/2022-science-project/quadratic.html)
+- simple neural network: [/code/completed/experiments/simple_neural_network.html](https://frostythesouthernsnowman.github.io/2022-science-project/simple_neural_network.html)
+
 ## Experiments
 
 - experiment-01: [/code/completed/experiments/experiment-01.py](/code/completed/experiments/experiment-01.py)
