@@ -26,8 +26,11 @@ The html for the graphs can be found on the pages.
 
 - quadratic equation: [/code/completed/experiments/quadratic.html](https://frostythesouthernsnowman.github.io/2022-science-project/quadratic.html)
 - simple neural network: [/code/completed/experiments/simple_neural_network.html](https://frostythesouthernsnowman.github.io/2022-science-project/simple_neural_network.html)
+- simple neural network with modified binary search: [/code/completed/experiments/simple_neural_network.html](https://frostythesouthernsnowman.github.io/2022-science-project/simple_nn_modified_binary_search.html)
 
 ## Experiments
 
 - experiment-01: [/code/completed/experiments/experiment-01.py](/code/completed/experiments/experiment-01.py)
 - experiment-02: [/code/completed/experiments/experiment-02.py](/code/completed/experiments/experiment-02.py)
+- experiment-03: [/code/completed/experiments/experiment-02.py](/code/completed/experiments/experiment-03.py)
+- experiment-04: [/code/completed/experiments/experiment-02.py](/code/completed/experiments/experiment-04.py)

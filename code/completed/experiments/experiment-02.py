@@ -117,6 +117,3 @@ if __name__ == "__main__":
         print("equal or bug/error")
         print(f"gradient descent minimum: {grad_descent_mins[-1]}")
         print(f"bin_search minimum: {bin_search_mins[-1]}")
-
-    print(len(bin_search_mins))
-    print(len(grad_descent_mins))
