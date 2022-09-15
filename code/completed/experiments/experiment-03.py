@@ -1,12 +1,13 @@
+"""
+!!! THE EXPERIMENT FAILED, CODE WILL NOT WORK, ERRORS WILL BE GENERATED
+"""
+
 from functools import cache
 import math
-import numpy as np
-
-np.random.seed(21)
 
 lr = 0.1
 n_epochs = 20_000
-number = -20
+number = 30
 
 
 @cache
@@ -43,7 +44,7 @@ def min_grad_descent(lr, n_epochs, return_hist=False):
     return num
 
 
-def min_bin_search(lr, n_epochs, return_hist=False):
+def min_bin_search_with_range(lr, n_epochs, return_hist=False):
     global number
     num = number
 
@@ -55,11 +56,23 @@ def min_bin_search(lr, n_epochs, return_hist=False):
     num -= grad
     iters = 0
     for _ in range(n_epochs - iters):
-        if func(num) > func(num_prev):
+        print("loop")
+        num_score = func(num)
+        num_prev_score = func(num_prev)
+        half_point = num_prev + ((num - num_prev) / 2)
+        half_point_score = func(half_point)
+        """
+        all the following were shown to be equal, method doesn't work (with this implementation)
+        print(num_score)
+        print(half_point_score)
+        print(num_prev_score) 
+        """
+        if func(half_point) < num_score and func(half_point) < num_prev_score:
+            num = half_point
             break
         else:
-            num_prev = num
-            num -= grad
+            num_prev *= 2
+            num *= 2
 
         if return_hist:
             hist.append(num)
@@ -86,7 +99,7 @@ def min_bin_search(lr, n_epochs, return_hist=False):
 
 if __name__ == "__main__":
     grad_descent_mins = min_grad_descent(lr, n_epochs, return_hist=True)
-    bin_search_mins = min_bin_search(lr, n_epochs, return_hist=True)
+    bin_search_mins = min_bin_search_with_range(lr, n_epochs, return_hist=True)
 
     x_vals = [bin_search_mins[-1] - 10, bin_search_mins[-1] - 9, bin_search_mins[-1] - 8, bin_search_mins[-1] - 7, bin_search_mins[-1] - 6, bin_search_mins[-1] - 5, bin_search_mins[-1] - 4, bin_search_mins[-1] - 3, bin_search_mins[-1] - 2, bin_search_mins[-1] - 1, bin_search_mins[-1], bin_search_mins[-1] + 1, bin_search_mins[-1] + 2,
               bin_search_mins[-1] + 3, bin_search_mins[-1] + 4, bin_search_mins[-1] + 5, bin_search_mins[-1] + 6, bin_search_mins[-1] + 7, bin_search_mins[-1] + 8, bin_search_mins[-1] + 9, bin_search_mins[-1] + 10]
