@@ -1,0 +1,154 @@
+from functools import cache
+import math
+import numpy as np
+
+np.random.seed(77)
+
+lr = 0.1
+step = 1
+n_epochs = 20_000
+number = np.random.randint(-30, 30) * np.random.random()
+number = -13.2358147
+
+
+@cache
+def sigmoid(n):
+    return 1 / (1 + math.exp(-n))
+
+
+@cache
+def func(n):
+    return (sigmoid(n*2+34) - 0.5)**2
+
+
+@cache
+def d_func(n):
+    return (2*(math.exp(2*n+34)-1)*math.exp(2*n+34))/(math.exp(2*n+34)+1)**3
+
+
+def min_grad_descent(lr, n_epochs, return_hist=False):
+    global number
+    num = number
+
+    if return_hist:
+        hist = []
+        hist.append(num)
+
+    for _ in range(n_epochs):
+        num -= d_func(num) * lr
+
+        if return_hist:
+            hist.append(num)
+
+    if return_hist:
+        return hist
+
+    return num
+
+
+def min_bin_search_fixed_step_size_with_bug_fix(step, n_epochs, return_hist=False):
+    global number
+    num = number
+
+    if return_hist:
+        hist = []
+        hist.append(num)
+
+    num_prev = num
+    prev_num_prev = num
+    grad = d_func(num) * lr
+    num -= grad
+    iters = 0
+    for _ in range(n_epochs - iters):
+        if func(num) > func(num_prev):
+            num_prev = prev_num_prev
+            break
+        else:
+            prev_num_prev = num_prev
+            num_prev = num
+            if abs(grad) < step:
+                if grad < 0:
+                    grad = -step
+                if grad > 0:
+                    grad = step
+                if grad == 0:
+                    break
+
+            num -= grad
+
+        if return_hist:
+            hist.append(num)
+
+        iters += 1
+
+    for _ in range(n_epochs - iters):
+        if not (num <= -17 <= num_prev or num_prev <= -17 <= num):
+            print("overshot!!!")
+            print(iters)
+            print(num)
+            print(num_prev)
+            exit()
+
+        half_point = num_prev + ((num - num_prev) / 2)
+        first_quartile = num_prev + ((half_point - num_prev) / 2)
+        third_quartile = num + ((half_point - num) / 2)
+
+        first_quartile_loss = func(first_quartile)
+        half_point_loss = func(half_point)
+        third_quartile_loss = func(third_quartile)
+
+        if first_quartile_loss < half_point_loss:
+            num = half_point
+
+        elif third_quartile_loss < half_point_loss:
+            num_prev = half_point
+
+        else:
+            num = third_quartile
+            num_prev = first_quartile
+
+        if return_hist:
+            hist.append(num)
+
+    if return_hist:
+        return hist, num_prev
+
+    return num
+
+
+if __name__ == "__main__":
+    grad_descent_mins = min_grad_descent(lr, n_epochs, return_hist=True)
+    bin_search_mins, prev = min_bin_search_fixed_step_size_with_bug_fix(
+        step, n_epochs, return_hist=True)
+
+    x_vals = [bin_search_mins[-1] - 10, bin_search_mins[-1] - 9, bin_search_mins[-1] - 8, bin_search_mins[-1] - 7, bin_search_mins[-1] - 6, bin_search_mins[-1] - 5, bin_search_mins[-1] - 4, bin_search_mins[-1] - 3, bin_search_mins[-1] - 2, bin_search_mins[-1] - 1, bin_search_mins[-1], bin_search_mins[-1] + 1, bin_search_mins[-1] + 2,
+              bin_search_mins[-1] + 3, bin_search_mins[-1] + 4, bin_search_mins[-1] + 5, bin_search_mins[-1] + 6, bin_search_mins[-1] + 7, bin_search_mins[-1] + 8, bin_search_mins[-1] + 9, bin_search_mins[-1] + 10]
+    y_vals = [func(x) for x in x_vals]
+    z = [x * 100 for x in range(n_epochs//100)]
+
+    grad_descent_mins = grad_descent_mins[::100]
+    bin_search_mins = bin_search_mins[::100]
+
+    from plotly import graph_objects as go
+
+    fig = go.Figure()
+    fig.add_trace(go.Mesh3d(x=x_vals*(n_epochs//1000), y=[((x//len(x_vals)))*1000 for x in range((n_epochs//1000)*len(x_vals))], z=y_vals*(n_epochs//1000),
+                  name="experiment-02: binary search is better. f(x) = sigmoid(x+34)"))  # ! THAT IS NOT F(X), FIX NOW
+    fig.add_trace(go.Scatter3d(x=grad_descent_mins, y=z, z=[
+                  func(x) for x in grad_descent_mins], mode="lines+markers", name=f"gradient descent minimum: {grad_descent_mins[-1]}"))
+    fig.add_trace(go.Scatter3d(x=bin_search_mins, y=z, z=[
+                  func(x) for x in bin_search_mins], mode="lines+markers", name=f"binary search minimum: {bin_search_mins[-1]}"))
+    fig.show()
+
+    if abs(func(grad_descent_mins[-1])) < abs(func(bin_search_mins[-1])):
+        print("gradient descent is better")
+
+    elif abs(func(bin_search_mins[-1])) < abs(func(grad_descent_mins[-1])):
+        print("binary search is better")
+
+    else:
+        print("equal or bug/error")
+        print(f"gradient descent minimum: {grad_descent_mins[-1]}")
+        print(f"bin_search minimum: {bin_search_mins[-1]}")
+
+    print(prev)
