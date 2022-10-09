@@ -31,9 +31,10 @@ You can contact me via email (yosi_frost@icloud.com) if necessary.
 
 The html for the graphs can be found on the pages.
 
-- quadratic equation: [/code/completed/experiments/quadratic.html](https://frostythesouthernsnowman.github.io/2022-science-project/quadratic.html)
-- simple neural network: [/code/completed/experiments/simple_neural_network.html](https://frostythesouthernsnowman.github.io/2022-science-project/simple_neural_network.html)
-- simple neural network with modified binary search: [/code/completed/experiments/simple_neural_network.html](https://frostythesouthernsnowman.github.io/2022-science-project/simple_nn_modified_binary_search.html)
+- quadratic equation: [/code/completed/pages/graphs/quadratic.html](https://frostythesouthernsnowman.github.io/2022-science-project/graphs/quadratic.html)
+- simple neural network: [/code/completed/pages/graphs/simple_neural_network.html](https://frostythesouthernsnowman.github.io/2022-science-project/graphs/simple_neural_network.html)
+- simple neural network with modified binary search: [/code/completed/pages/graphs/simple_nn_modified_binary_search.html](https://frostythesouthernsnowman.github.io/2022-science-project/graphs/simple_nn_modified_binary_search.html)
+- simple neural network with modified binary search after bug fix: [/code/completed/pages/graphs/simple_nn_modified_binary_search_and_bug_fix.html](https://frostythesouthernsnowman.github.io/2022-science-project/graphs/simple_nn_modified_binary_search_and_bug_fix.html)
 
 ## Experiments
 
