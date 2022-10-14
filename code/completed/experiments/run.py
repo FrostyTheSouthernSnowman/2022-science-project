@@ -14,20 +14,16 @@ def run(func, bin_search, grad_descent, lr, n_epochs, step=None, small=False):
         z = [x for x in range(n_epochs)]
 
     else:
-        z = [x * 100 for x in range(n_epochs//100)]
+        z = [x * 25 for x in range(n_epochs//25)]
 
-        grad_descent_mins = grad_descent_mins[::100]
-        bin_search_mins = bin_search_mins[::100]
+        grad_descent_mins = grad_descent_mins[::25]
+        bin_search_mins = bin_search_mins[::25]
 
     from plotly import graph_objects as go
 
     fig = go.Figure()
-    if small:
-        fig.add_trace(go.Mesh3d(x=x_vals*(n_epochs//1000), y=[((x//len(x_vals)))*1000 for x in range((n_epochs//1000)*len(x_vals))], z=y_vals*(n_epochs//1000),
-                                name="experiment-02"))
-    else:
-        fig.add_trace(go.Mesh3d(x=x_vals*(n_epochs//1000), y=[((x//len(x_vals)))*1000 for x in range((n_epochs//1000)*len(x_vals))], z=y_vals*(n_epochs//1000),
-                                name="experiment-02"))
+    fig.add_trace(go.Mesh3d(x=x_vals*(n_epochs//1000), y=[((x//len(x_vals)))*1000 for x in range((n_epochs//1000)*len(x_vals))], z=y_vals*(n_epochs//1000),
+                            name="experiment-02"))
     fig.add_trace(go.Scatter3d(x=grad_descent_mins, y=z, z=[
                   func(x) for x in grad_descent_mins], mode="lines+markers", name=f"gradient descent minimum: {grad_descent_mins[-1]}"))
     fig.add_trace(go.Scatter3d(x=bin_search_mins, y=z, z=[

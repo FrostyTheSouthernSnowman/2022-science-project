@@ -9,7 +9,7 @@ lr = 0.1
 step = 1
 n_epochs = 20_000
 number = np.random.randint(-30, 30) * np.random.random()
-number = -13.2358147
+number = -20
 
 
 @cache
