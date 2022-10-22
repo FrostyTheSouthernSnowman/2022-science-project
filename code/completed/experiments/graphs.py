@@ -2,7 +2,6 @@
 Script used to generate graphs for presentation
 """
 
-from re import template
 import plotly.express as px
 import pandas as pd
 from experiment_02 import func
@@ -38,4 +37,20 @@ def plot_all_scores_by_time():
     fig.write_image("all_algos_neural_network.png")
 
 
-plot_all_scores_by_time()
+def plot_func():
+    x_vals = []
+    incr = 0.125
+    start = -27
+    end = -7
+    num = start
+    while num <= end:
+        x_vals.append(num)
+        num += incr
+
+    y_vals = [func(x) for x in x_vals]
+
+    plt = px.line(x=x_vals, y=y_vals)
+    plt.write_image("simple_neural_network.png")
+
+
+plot_func()
