@@ -38,8 +38,8 @@ The html for the graphs can be found on the pages.
 
 ## Experiments
 
-- experiment-01: [/code/completed/experiments/experiment-01.py](/code/completed/experiments/experiment-01.py)
-- experiment-02: [/code/completed/experiments/experiment-02.py](/code/completed/experiments/experiment-02.py)
-- experiment-03: [/code/completed/experiments/experiment-03.py](/code/completed/experiments/experiment-03.py)
-- experiment-04: [/code/completed/experiments/experiment-04.py](/code/completed/experiments/experiment-04.py)
-- experiment-05: [/code/completed/experiments/experiment-05.py](/code/completed/experiments/experiment-05.py)
+- experiment-01: [/code/completed/experiments/experiment-01.py](/code/completed/experiments/experiment_01.py)
+- experiment-02: [/code/completed/experiments/experiment-02.py](/code/completed/experiments/experiment_02.py)
+- experiment-03: [/code/completed/experiments/experiment-03.py](/code/completed/experiments/experiment_03.py)
+- experiment-04: [/code/completed/experiments/experiment-04.py](/code/completed/experiments/experiment_04.py)
+- experiment-05: [/code/completed/experiments/experiment-05.py](/code/completed/experiments/experiment_05.py)
